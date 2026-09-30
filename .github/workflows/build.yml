@@ -1,36 +1,66 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
+name: CI - Unified Android 10+ Build
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
-    branches: [ "*" ]
+    branches: [ "feature/unified-android-10-plus-permissions", "master" ]
   pull_request:
-    branches: [ "*" ]
-
-  # Allows you to run this workflow manually from the Actions tab
+    branches: [ "feature/unified-android-10-plus-permissions", "master" ]
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-     - name: Get current date
-       id: date
-       run: echo "date=$(date +'%Y-%m-%d_%H-%M_%S')" >> "$GITHUB_OUTPUT"
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-     - uses: actions/checkout@v4
-     - run: |
-          chmod +x "${GITHUB_WORKSPACE}/scripts/build.sh"
-          "${GITHUB_WORKSPACE}/scripts/build.sh"
-     - uses: actions/upload-artifact@v4
-       with:
-          path: app/build/outputs/apk/debug/app-debug.apk
-          name: ad-free-debug-${{ steps.date.outputs.date }}.apk
+      - name: Get current date
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d_%H-%M-%S')" >> "$GITHUB_OUTPUT"
+
+      - name: Get build info
+        id: build_info
+        run: |
+          echo "android_version=10-14" >> "$GITHUB_OUTPUT"
+          echo "api_level=29-34" >> "$GITHUB_OUTPUT"
+          echo "build_type=unified" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          sdk-version: '34'
+          build-tools: '34.0.0'
+          accept-licenses: true
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: |
+          echo "sdk.dir=${ANDROID_HOME}" > local.properties
+          ./gradlew --no-daemon --stacktrace test assembleDebug
+
+      - name: Rename APK with version and build info
+        run: |
+          BUILD_DATE=$(date +'%Y-%m-%d_%H-%M-%S')
+          ANDROID_VERSION=${{ steps.build_info.outputs.android_version }}
+          API_LEVEL=${{ steps.build_info.outputs.api_level }}
+          
+          if [[ -f "app/build/outputs/apk/debug/app-debug.apk" ]]; then
+            cp "app/build/outputs/apk/debug/app-debug.apk" \
+               "app/build/outputs/apk/debug/ad-free-unified-android-${ANDROID_VERSION}-api${API_LEVEL}-build-${BUILD_DATE}.apk"
+            echo "Built APK: ad-free-unified-android-${ANDROID_VERSION}-api${API_LEVEL}-build-${BUILD_DATE}.apk"
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          path: app/build/outputs/apk/debug/ad-free-unified-android-${{ steps.build_info.outputs.android_version }}-api${{ steps.build_info.outputs.api_level }}-build-${{ steps.date.outputs.date }}.apk
+          name: ad-free-unified-android-${{ steps.build_info.outputs.android_version }}-api${{ steps.build_info.outputs.api_level }}-build-${{ steps.date.outputs.date }}.apk
