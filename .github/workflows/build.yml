@@ -38,10 +38,10 @@ jobs:
         with:
           cmdline-tools-version: '15859902'
           accept-android-sdk-licenses: true
-          packages: |
-            platforms;android-34
-            build-tools;34.0.0
-            platform-tools
+          packages:
+            - platforms;android-34
+            - build-tools;34.0.0
+            - platform-tools
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
