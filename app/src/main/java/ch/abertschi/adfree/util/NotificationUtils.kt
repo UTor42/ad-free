@@ -151,7 +151,7 @@ class NotificationUtils(val context: Context) : AnkoLogger {
             if (intent == null || intent.action == null) {
                 return
             }
-            val actionKey: String = intent!!.action
+            val actionKey: String = intent.action!!
             if (actionKey.equals(actionDismiss)) {
                 synchronized(actionDismissCallables) {
                     actionDismissCallables.forEach {

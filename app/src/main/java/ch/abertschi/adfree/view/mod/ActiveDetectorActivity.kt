@@ -12,10 +12,10 @@ import android.view.LayoutInflater
 import ch.abertschi.adfree.R
 import org.jetbrains.anko.*
 
-import androidx.appcompat.widget.RecyclerView
 import android.view.ViewGroup
 
-import androidx.appcompat.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.appcompat.widget.SwitchCompat
 import android.view.View
 import android.widget.ScrollView
@@ -24,9 +24,9 @@ import java.lang.IllegalStateException
 
 class ActiveDetectorActivity : AppCompatActivity(), AnkoLogger {
 
-    private lateinit var detectorRecyclerView: RecyclerView
-    private lateinit var detectorViewAdapter: RecyclerView.Adapter<*>
-    private lateinit var detectorViewManager: RecyclerView.LayoutManager
+    private lateinit var detectorRecyclerView: androidx.recyclerview.widget.RecyclerView
+    private lateinit var detectorViewAdapter: androidx.recyclerview.widget.RecyclerView.Adapter<*>
+    private lateinit var detectorViewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
 
     private lateinit var presenter: ActiveDetectorPresenter
 
@@ -66,7 +66,7 @@ class DetectorAdapter(
     private val detectors: List<AdDetectable>,
     private val presenter: ActiveDetectorPresenter
 ) :
-    RecyclerView.Adapter<DetectorAdapter.MyViewHolder>(), AnkoLogger {
+    androidx.recyclerview.widget.RecyclerView.Adapter<DetectorAdapter.MyViewHolder>(), AnkoLogger {
 
     class MyViewHolder(
         val view: View,
@@ -74,7 +74,7 @@ class DetectorAdapter(
         val subtitle: TextView,
         val switch: SwitchCompat,
         val sepView: View
-    ) : RecyclerView.ViewHolder(view)
+    ) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

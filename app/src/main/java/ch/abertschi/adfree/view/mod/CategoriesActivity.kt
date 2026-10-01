@@ -10,19 +10,19 @@ import android.view.LayoutInflater
 import ch.abertschi.adfree.R
 import org.jetbrains.anko.*
 
-import androidx.appcompat.widget.RecyclerView
 import android.view.ViewGroup
 
-import androidx.appcompat.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.appcompat.widget.SwitchCompat
 import android.view.View
 import android.widget.ScrollView
 
 
 class CategoriesActivity : AppCompatActivity(), AnkoLogger {
-    private lateinit var categoriesRecyclerView: RecyclerView
-    private lateinit var categoriesViewAdapter: RecyclerView.Adapter<*>
-    private lateinit var categoriesViewManager: RecyclerView.LayoutManager
+    private lateinit var categoriesRecyclerView: androidx.recyclerview.widget.RecyclerView
+    private lateinit var categoriesViewAdapter: androidx.recyclerview.widget.RecyclerView.Adapter<*>
+    private lateinit var categoriesViewManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
 
     private lateinit var presenter: CategoriesPresenter
 
@@ -68,14 +68,14 @@ class CategoryAdapter(
     private val cateogries: List<String>,
     private val presenter: CategoriesPresenter
 ) :
-    RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>(), AnkoLogger {
+    androidx.recyclerview.widget.RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>(), AnkoLogger {
 
     class CategoryViewHolder(
         val view: View,
         val title: TextView,
         val subtitle: TextView,
         val sepView: View
-    ) : RecyclerView.ViewHolder(view)
+    ) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

@@ -57,7 +57,7 @@ fun getPath(context: Context, uri: Uri): String? {
 
     } else if ("content".equals(uri.scheme, ignoreCase = true)) {
         return if (isGooglePhotosUri(uri)) uri.lastPathSegment
-        else getDataColumn(context, uri, null, null)
+        else getDataColumn(context, uri!!, null, null)
 
     } else if ("file".equals(uri.scheme, ignoreCase = true)) {
         return uri.path
