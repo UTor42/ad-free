@@ -34,7 +34,7 @@ fun getPath(context: Context, uri: Uri): String? {
             val contentUri = ContentUris.withAppendedId(
                     Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id))
 
-            return getDataColumn(context, contentUri, null, null)
+            return contentUri?.let { getDataColumn(context, it, null, null) }
         } else if (isMediaDocument(uri)) {
             val docId = DocumentsContract.getDocumentId(uri)
             val split = docId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
@@ -52,12 +52,12 @@ fun getPath(context: Context, uri: Uri): String? {
             val selection = "_id=?"
             val selectionArgs = arrayOf(split[1])
 
-            return getDataColumn(context, contentUri, selection, selectionArgs)
+            return contentUri?.let { getDataColumn(context, it, selection, selectionArgs) }
         }
 
     } else if ("content".equals(uri.scheme, ignoreCase = true)) {
         return if (isGooglePhotosUri(uri)) uri.lastPathSegment
-        else getDataColumn(context, uri!!, null, null)
+        else getDataColumn(context, uri, null, null)
 
     } else if ("file".equals(uri.scheme, ignoreCase = true)) {
         return uri.path
@@ -66,7 +66,7 @@ fun getPath(context: Context, uri: Uri): String? {
     return null
 }
 
-fun getDataColumn(context: Context, uri: Uri?, selection: String?,
+fun getDataColumn(context: Context, uri: Uri, selection: String?,
                   selectionArgs: Array<String>?): String? {
 
     var cursor: Cursor? = null
@@ -75,13 +75,13 @@ fun getDataColumn(context: Context, uri: Uri?, selection: String?,
 
     try {
         cursor = context.contentResolver.query(uri, projection, selection, selectionArgs, null)
-        if (cursor != null && cursor!!.moveToFirst()) {
-            val index = cursor!!.getColumnIndexOrThrow(column)
-            return cursor!!.getString(index)
+        if (cursor != null && cursor.moveToFirst()) {
+            val index = cursor.getColumnIndexOrThrow(column)
+            return cursor.getString(index)
         }
     } finally {
         if (cursor != null)
-            cursor!!.close()
+            cursor.close()
     }
     return null
 }
