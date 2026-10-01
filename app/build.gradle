@@ -6,6 +6,10 @@ plugins {
 android {
     compileSdk 34
     
+    buildFeatures {
+        buildConfig = true
+    }
+    
     defaultConfig {
         applicationId "ch.abertschi.adfree"
         minSdk 29  // Android 10 (API 29) - minimale unterstuetzte Version
