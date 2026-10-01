@@ -21,8 +21,8 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.runOnUiThread
 
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.SwitchCompat
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SwitchCompat
 import ch.abertschi.adfree.AdFreeApplication
 import ch.abertschi.adfree.view.ViewSettings
 import org.jetbrains.anko.info

@@ -14,8 +14,8 @@ import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -84,7 +84,7 @@ class SettingsActivity : Fragment(), SettingsView, AnkoLogger, PluginActivityAct
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super.onViewCreated(view, savedInstanceState)
         this.rootView = view
 
         storedAppContext = activity?.applicationContext as AdFreeApplication
@@ -178,10 +178,6 @@ class SettingsActivity : Fragment(), SettingsView, AnkoLogger, PluginActivityAct
         this.tryActivity().toast("Trying out plugin")
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        callablesOnActivityResult.forEach { it(requestCode, resultCode, data) }
-    }
 
     override fun addOnActivityResult(
         callable: (requestCode: Int, resultCode: Int, data: Intent?)

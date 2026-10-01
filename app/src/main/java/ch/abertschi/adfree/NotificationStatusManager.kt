@@ -10,7 +10,7 @@ import android.os.Build
 import android.service.notification.ConditionProviderService
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.warn
-import android.support.v4.app.NotificationManagerCompat
+import androidx.core.app.NotificationManagerCompat
 import org.jetbrains.anko.info
 
 

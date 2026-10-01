@@ -1,7 +1,7 @@
 package ch.abertschi.adfree.view.mod
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.text.Html
 
 import android.widget.TextView
@@ -10,11 +10,11 @@ import android.view.LayoutInflater
 import ch.abertschi.adfree.R
 import org.jetbrains.anko.*
 
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.widget.RecyclerView
 import android.view.ViewGroup
 
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.SwitchCompat
+import androidx.appcompat.widget.LinearLayoutManager
+import androidx.appcompat.widget.SwitchCompat
 import android.view.View
 import android.widget.ScrollView
 

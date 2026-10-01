@@ -2,15 +2,15 @@ package ch.abertschi.adfree.view.mod
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.SwitchCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import android.text.Html
 
 import android.view.View
 
 import android.widget.TextView
 
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.widget.SeekBar
 
 

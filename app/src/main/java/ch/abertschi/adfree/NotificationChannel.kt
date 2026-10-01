@@ -8,10 +8,10 @@ package ch.abertschi.adfree
 
 import android.app.Notification
 import android.content.Context
-import android.support.v4.app.NotificationManagerCompat
+import androidx.core.app.NotificationManagerCompat
 import ch.abertschi.adfree.model.PreferencesFactory
 import ch.abertschi.adfree.util.NotificationUtils
-import android.support.v4.content.ContextCompat.startActivity
+import androidx.core.content.ContextCompat.startActivity
 import android.content.Intent
 import ch.abertschi.adfree.view.mod.ModActivity
 
