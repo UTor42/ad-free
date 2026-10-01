@@ -38,8 +38,8 @@ class ActiveDetectorActivity : AppCompatActivity(), AnkoLogger {
 
         presenter = ActiveDetectorPresenter(this)
 
-        val category: String = intent.extras.getString(CategoriesPresenter.BUNDLE_CATEGORY_KEY)
-            ?: throw  IllegalStateException("must set category")
+        val category: String = intent.extras?.getString(CategoriesPresenter.BUNDLE_CATEGORY_KEY)
+            ?: throw IllegalStateException("must set category")
 
         val text =
             "fine-tune detectors for <font color=#FFFFFF>$category</font>."

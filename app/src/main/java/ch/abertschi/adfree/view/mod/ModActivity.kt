@@ -121,7 +121,7 @@ class ModActivity : AppCompatActivity(), AnkoLogger {
 
     fun showDelayUnmute() {
         delayDialog.show()
-        delayDialog.window.setBackgroundDrawableResource(R.color.colorBackground)
+        delayDialog.window?.setBackgroundDrawableResource(R.color.colorBackground)
     }
 
     fun setDelayValue(p: Int) {

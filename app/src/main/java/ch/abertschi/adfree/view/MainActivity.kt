@@ -55,11 +55,11 @@ class MainActivity : FragmentActivity() {
 
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-        override fun getItem(position: Int): Fragment? {
-            when (position) {
-                0 -> return HomeActivity()
-                1 -> return SettingsActivity()
-                else -> return AboutActivity()
+        override fun getItem(position: Int): Fragment {
+            return when (position) {
+                0 -> HomeActivity()
+                1 -> SettingsActivity()
+                else -> AboutActivity()
             }
         }
 
