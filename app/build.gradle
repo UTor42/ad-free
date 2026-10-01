@@ -8,12 +8,17 @@ android {
     
     defaultConfig {
         applicationId "ch.abertschi.adfree"
-        minSdk 29  // Android 10 (API 29) - minimale unterstützte Version
+        minSdk 29  // Android 10 (API 29) - minimale unterstuetzte Version
         targetSdk 34  // Android 14 (API 34) - aktuelle Zielversion
         versionCode 50
         versionName "4.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
+
+        // BuildConfig für alle BuildTypes generieren (auch release)
+        buildConfigField "int", "VERSION_CODE", "50"
+        buildConfigField "String", "VERSION_NAME", "\"4.0\""
+        buildConfigField "boolean", "DEBUG", "false"
     }
 
     compileOptions {
