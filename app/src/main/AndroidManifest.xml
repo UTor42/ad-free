@@ -10,16 +10,28 @@
         2. Audio Kontrolle - zum Ändern der Lautstärke
         3. Eigene Notifications senden
         4. Foreground Service für Dauerbetrieb
+        5. Speicherzugriff für lokale Musik-Dateien
+        6. Netzwerkzugriff für Remote-Konfiguration
     -->
     
-    <!-- Foreground Service für Notification Listener -->
+    <!-- Foreground Service für Dauerbetrieb -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    
+    <!-- Notification Listener Service - zum Lesen von Benachrichtigungen -->
+    <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"/>
     
     <!-- Ändern der Audio-Lautstärke (für alle Android Versionen) -->
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     
     <!-- Notifications senden (ab Android 13 benötigt, für ältere Versionen optional) -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    
+    <!-- Speicherzugriff für lokale Musik-Dateien (ab Android 13) -->
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    
+    <!-- Netzwerkzugriff für Remote-Konfiguration -->
+    <uses-permission android:name="android.permission.INTERNET"/>
 
 
     <application
@@ -80,7 +92,7 @@
 
         <!-- 
             Notification Listener Service
-            BIND_NOTIFICATION_LISTENER_SERVICE wird automatisch als Service-Berechtigung benötigt
+            BIND_NOTIFICATION_LISTENER_SERVICE wird als Service-Berechtigung benötigt
         -->
         <service
             android:name=".NotificationsListeners"
